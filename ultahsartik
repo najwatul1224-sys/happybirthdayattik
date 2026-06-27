@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Princess Kiyowo 🎀</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #fff0f3;
+            background-image: radial-gradient(#ffccd5 2px, transparent 2px);
+            background-size: 25px 25px;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: #ff4d6d;
+        }
+
+        /* Container khusus ukuran layar HP */
+        .phone-container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.93);
+            min-height: 100vh;
+            position: relative;
+            padding: 20px 20px 80px 20px; /* space bawah untuk menu navbar */
+            box-shadow: 0 0 20px rgba(255, 143, 163, 0.2);
+            border-left: 2px solid #ffccd5;
+            border-right: 2px solid #ffccd5;
+            overflow-y: auto;
+        }
+
+        /* Navigasi Menu Atas/Bawah Ala Aplikasi HP */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -5px 15px rgba(255, 143, 163, 0.15);
+            border-top: 3px solid #ffb3c6;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            z-index: 10;
+        }
+
+        .nav-item {
+            font-family: 'Fredoka One', cursive;
+            font-size: 12px;
+            color: #ff85a1;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: 0.3s;
+        }
+
+        .nav-item.active {
+            color: #ff4d6d;
+            transform: scale(1.1);
+        }
+
+        .nav-item span {
+            font-size: 22px;
+        }
+
+        /* Pengaturan Halaman Konten (Default Sembunyi) */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* === TAB 1: HOME === */
+        .home-content {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .avatar-frame {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 5px solid #ffb3c6;
+            margin: 0 auto 20px auto;
+            overflow: hidden;
+            animation: bounce 2s infinite;
+            box-shadow: 0 8px 15px rgba(255, 143, 163, 0.3);
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 26px;
+            text-shadow: 2px 2px 0px #ffe5ec;
+            margin-bottom: 5px;
+        }
+
+        .tag-line {
+            background: #ffe5ec;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .main-card-text {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px dashed #ffccd5;
+            line-height: 1.6;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* === TAB 2: GALLERY (KOLASE + TOMBOL) === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 8px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(255, 179, 198, 0.3);
+            border: 1px solid #ffccd5;
+            text-align: center;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        .photo-btn {
+            background: #ff85a1;
+            color: white;
+            border: none;
+            padding: 6px 0;
+            width: 100%;
+            border-radius: 10px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 11px;
+            cursor: pointer;
+            box-shadow: 0 3px 0px #ff4d6d;
+        }
+
+        .photo-btn:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        /* === TAB 3: WISHES LIST === */
+        .wish-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .wish-item {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            border-left: 5px solid #ff4d6d;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.03);
+        }
+
+        .wish-item h4 {
+            margin: 0 0 5px 0;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .wish-item p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #ff758f;
+            font-weight: 700;
+        }
+
+        /* === TAB 4: GIFT BOX === */
+        .gift-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .gift-box {
+            font-size: 80px;
+            cursor: pointer;
+            animation: shake 0.5s infinite alternate;
+            display: inline-block;
+        }
+
+        /* Pop-up Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 240, 243, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            max-width: 300px;
+            width: 85%;
+            text-align: center;
+            border: 3px dashed #ff4d6d;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .close-btn {
+            background: #ffb3c6;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Dekorasi Taburan */
+        .decor {
+            position: fixed;
+            top: -5vh;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        /* Animasi-Animasi */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes shake { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+
+    <!-- === NAV MENU BAWAH === -->
+    <div class="navbar">
+        <div class="nav-item active" onclick="switchPage('home', this)">
+            <span>🏠</span>Home
+        </div>
+        <div class="nav-item" onclick="switchPage('gallery', this)">
+            <span>📸</span>Galeri
+        </div>
+        <div class="nav-item" onclick="switchPage('wishes', this)">
+            <span>💌</span>Doa
+        </div>
+        <div class="nav-item" onclick="switchPage('gift', this)">
+            <span>🎁</span>Hadiah
+        </div>
+    </div>
+
+    <!-- === HALAMAN 1: HOME === -->
+    <div id="home" class="page active">
+        <div class="home-content">
+            <div class="avatar-frame">
+                <!-- Ganti link URL gambar di bawah ini dengan foto profil dia jika mau -->
+                <img src="1.png" alt="Foto Utama">
+            </div>
+            <h1>Happy Birthday! 🎂</h1>
+            <div class="tag-line">🌸 To: Cewek Paling Positif Vibes 🌸</div>
+            <div class="main-card-text">
+                "Annyeong! Selamat hari menetas buat Attik yang paling gemesin, pinky, dan selalu bikin rame! Semoga di umur yang baru ini kamu makin bersinar. Yuk jelajahi menu di bawah untuk lihat kejutan lainnya! 🧸✨"
+            </div>
+        </div>
+    </div>
+
+    <!-- === HALAMAN 2: GALLERY === -->
+    <div id="gallery" class="page">
+        <h2 style="text-align:center; font-family:'Fredoka One';">Memory Box 🎞️</h2>
+        <p style="text-align:center; font-size:12px; font-weight:bold; margin-top:-10px;">Klik setiap tombol di foto untuk pesan khusus!</p>
+        
+        <div class="gallery-grid">
+            <!-- Foto 1 -->
+            <div class="polaroid">
+                <img src="6.png" alt="Foto 1">
+                <button class="photo-btn" onclick="showPopup('🌸', 'Cantik Maksimal!', 'Hari apapun kamu cantik! Gak boleh insekyur lagi pokoknya. Kamu berharga apa adanya! 💕')">BUKA 🦄</button>
+            </div>
+            <!-- Foto 2 -->
+            <div class="polaroid">
+                <img src="4.jpeg" alt="Foto 2">
+                <button class="photo-btn" onclick="showPopup('🍰', 'Kurangi Begadang!', 'HBD yaww! Tolong ya kebiasaan overthinking tengah malam dan begadangnya dikurangi, kasihan matanya panda! 🐼')">KLIK KAK 🎀</button>
+            </div>
+            <!-- Foto 3 -->
+            <div class="polaroid">
+                <img src="3.jpeg" alt="Foto 3">
+                <button class="photo-btn" onclick="showPopup('🧸', 'Teman Terbaik!', 'Makasih ya udah selalu dengerin curhatanku. Semoga pertemanan kita awet terus sampai kita nenek-nenek kiyowo! 👵💗')">OPEN ✨</button>
+            </div>
+            <!-- Foto 4 -->
+            <div class="polaroid">
+                <img src="5.jpeg" alt="Foto 4">
+                <button class="photo-btn" onclick="showPopup('🌟', 'Makin Sukses!', 'Semoga kuliah/kerjanya lancar terus, rezekinya lancar, dan bisa beli barang-barang pink lucu yang kamu mau! 🛍️')">TAP DISINI 🍓</button>
+            </div>
+            <div class="polaroid">
+                <img src="7.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="showPopup('🌸', 'Nanti kita susul kak caca sama-sama,harus pokoknya sampe selesai💕')">INI JUGA 🦄</button>
+            </div>
+            <div class="polaroid">
+                <img src="8.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="showPopup('🌸', 'Disini nda pernah sa berfikir kalo pertemanan ta bakal sejauh ini sama kaka jihan')">TERAKHIR🦄</button>
+            </div>
+            <div class="polaroid">
+                <img src="13.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="">COMEL</button>
+            </div>
+            <div class="polaroid">
+                <img src="14.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="">KIYOWO</button>
+            </div>
+            <div class="polaroid">
+                <img src="9.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="">Nda Lupa Berasa</button>
+            </div>
+            <div class="polaroid">
+                <img src="10.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="">Kaka jihan</button>
+            </div>
+            <div class="polaroid">
+                <img src="11.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="">Tulang Punggung KKN</button>
+            </div>
+            <div class="polaroid">
+                <img src="12.jpeg" alt="Foto 1">
+                <button class="photo-btn" onclick="">Full Member Kaka Semua</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- === HALAMAN 3: WISHES === -->
+    <div id="wishes" class="page">
+        <h2 style="text-align:center; font-family:'Fredoka One';">Untaian Doa 💌</h2>
+        <div class="wish-list">
+            <div class="wish-item">
+                <h4>🤍 Sehat Selalu</h4>
+                <p>Semoga fisik dan mentalmu selalu dijaga, dijauhkan dari sakit, dan dikasih energi ekstra buat ngejalanin hari.</p>
+            </div>
+            <div class="wish-item">
+                <h4>🤍 Selalu Bahagia</h4>
+                <p>Semoga tawa ceria khas kamu gak pernah pudar, selalu dikelilingi orang baik yang tulus sayang sama kamu.</p>
+            </div>
+            <div class="wish-item">
+                <h4>🤍 Impian Terwujud</h4>
+                <p>Apa pun rencana besar atau kecilmu tahun ini, semoga dipermudah jalannya dan membuahkan hasil manis.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === HALAMAN 4: GIFT BOX === -->
+    <div id="gift" class="page">
+        <h2 style="text-align:center; font-family:'Fredoka One';">Kotak Misteri 🎁</h2>
+        <p style="text-align:center; font-size:13px; font-weight:bold;">Sentuh kotak di bawah untuk buka hadiah utamanya!</p>
+        <div class="gift-container">
+            <div class="gift-box" onclick="openGift()">🎁</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Pop-up Modal Box -->
+<div class="modal" id="popupModal">
+    <div class="modal-content">
+        <div id="popIcon" style="font-size: 45px;">🌸</div>
+        <h3 id="popTitle" style="font-family:'Fredoka One'; margin:10px 0;">Judul</h3>
+        <p id="popText" style="font-size:14px; line-height:1.5; font-weight:700; color:#ff758f;">Pesan</p>
+        <button class="close-btn" onclick="closePopup()">Tutup 💖</button>
+    </div>
+</div>
+
+<script>
+    // Fungsi ganti halaman menu tab
+    function switchPage(pageId, element) {
+        // Sembunyikan semua halaman
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => page.classList.remove('active'));
+        
+        // Hilangkan status aktif di navigasi
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active'));
+        
+        // Tampilkan halaman & tombol aktif yang dipilih
+        document.getElementById(pageId).classList.add('active');
+        element.classList.add('active');
+    }
+
+    // Fungsi Pop-up Tombol Foto
+    function showPopup(icon, title, text) {
+        document.getElementById('popIcon').innerText = icon;
+        document.getElementById('popTitle').innerText = title;
+        document.getElementById('popText').innerText = text;
+        document.getElementById('popupModal').style.display = 'flex';
+        
+        // Efek partikel kecil
+        for(let i=0; i<8; i++) spawnDecor();
+    }
+
+    function closePopup() {
+        document.getElementById('popupModal').style.display = 'none';
+    }
+
+    // Fungsi dekorasi jatuh (Kelopak Sakura, Love, dll)
+    function spawnDecor() {
+        const decor = document.createElement('div');
+        decor.classList.add('decor');
+        decor.innerHTML = ['💖', '🌸', '🎀', '✨', '💕', '🍓'][Math.floor(Math.random() * 6)];
+        decor.style.left = Math.random() * 100 + 'vw';
+        decor.style.animationDuration = Math.random() * 2 + 2 + 's';
+        decor.style.fontSize = Math.random() * 20 + 15 + 'px';
+        document.body.appendChild(decor);
+
+        setTimeout(() => { decor.remove(); }, 3500);
+    }
+
+    // Efek ketika tab hadiah dibuka
+    function openGift() {
+        // Mulai hujan dekorasi meriah
+        setInterval(spawnDecor, 100);
+        
+        showPopup('👑', 'Traktiran Menanti!', 'Selamat! Kamu berhak mendapatkan voucher pelukan gratis + ditraktir es krim/makanan kesukaanmu grup kaka jihan! Chat mereka sekarang yaaa! 🍦🍔🎈');
+    }
+</script>
+
+</body>
+</html>
